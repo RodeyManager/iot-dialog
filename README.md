@@ -3,8 +3,6 @@
 
 + 采用TypeScript开发弹框组件
 
-![Alt text](assets/images/iot-dialog-v1.jpg)
-
 ##USE
 
 ```javascript
@@ -78,6 +76,8 @@
     dialog.hide();
 
 ```
+
+![Alt text](assets/images/iot-dialog-v1.jpg)
 
 #License
 ISC
