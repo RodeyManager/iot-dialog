@@ -3,7 +3,7 @@
 
 + 采用TypeScript开发弹框组件
 
-![Alt text](assets/images/mpv1.jpg)
+![Alt text](assets/images/iot-dialog-v1.jpg)
 
 ##USE
 
