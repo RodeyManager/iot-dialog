@@ -1,0 +1,82 @@
+.iot-dialog-mask{
+    z-index: 3000;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.56);
+}
+
+.iot-dialog{
+    width: 80%;
+    /*min-height: 150px;*/
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 3px 2px rgba(0,0,0,.5);
+    padding-bottom: 40px;
+}
+
+.iot-dialog-title{
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    margin: 0 auto;
+    padding: 0;
+    /*border-bottom: solid 1px rgba(100,100,100,1);*/
+    text-align: center;
+}
+
+.iot-dialog-content{
+    padding: 10px;
+}
+
+.iot-dialog-btn-con{
+    width: 100%;
+    /*height: 40px;
+    line-height: 40px;*/
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    display: block;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
+.iot-dialog-btn{
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    padding: 0 10px;
+    font-size: 14px;
+    width: 50%;
+    border: solid 1px rgba(133, 144, 144, 0.5);
+    border-bottom: none;
+    box-sizing: border-box;
+    color: #2297DE;
+}
+.iot-dialog-btn.cancel{
+    /*background-color: #859090;*/
+    border-left: none;
+}
+.iot-dialog-btn.ok{
+    /*background-color: #3EBFBF;*/
+    border-right: none;
+    border-left: none;
+}

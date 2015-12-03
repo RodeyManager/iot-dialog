@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>TypeScript Demo Dialog</title>
+    <meta charset="UTF-8"/>
+    <meta content="descriptions" charset="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="assets/css/main.css"/>
+    <link rel="stylesheet" href="dist/dialog.css"/>
+
+</head>
+<body>
+
+    <div class="app member-app" id="app" scroll="no">
+        <div  class="form-group">
+            <button class="btn grade-btn" id="open-btn">打开</button>
+        </div>
+
+    </div>
+
+    <!--iot-dialog-->
+    <!--<div class="iot-dialog" id="iot-dialog-mp1" style="z-index: 3001;">
+        <h3 class="iot-dialog-title">标题</h3>
+        <div class="iot-dialog-content">内容</div>
+        <div class="iot-dialog-btn-con">
+            <span class="iot-dialog-btn cancel">取消</span>
+            <span class="iot-dialog-btn ok">确认</span>
+        </div>
+    </div>-->
+
+    <!--<div style="z-index: 3000;width: 100%;position: fixed;top: 0;left: 0;bottom: 0;right: 0;background-color: rgba(0, 0, 0, 0.56);"></div>-->
+
+    <!--载入js-->
+    <script src="dist/iot-dialog.js"></script>
+    <script>
+        var dialog;
+
+        window.onload = function(){
+            var openBtn = document.querySelector('#open-btn');
+
+            openBtn.addEventListener('click', openDialog, false);
+            function openDialog(evt){
+
+                if(iot.getDialog('OPEN-1')){
+                    dialog = iot.getDialog('OPEN-1');
+                    dialog.show();
+                    return false;
+                }
+
+                dialog = iot.dialog({
+                    id: 'OPEN-1',
+                    title: '提示',
+                    message: 'is message!!!is message!!!is message!!!is message!!!is message!!!is message!!!',
+                    ok: {
+                        text: '确认',
+                        callback: function(){
+                            console.log(this);
+                            setTile();
+                            return false;
+                        }
+                    },
+                    cancel: {
+                        text: '取消',
+                        callback: false
+                    }
+                });
+
+                //获取dialog
+                //iot.dialog().get('OPEN-1');
+
+            }
+
+            function setTile(){
+                dialog.setTitle('改变标题').shut('关闭', function(){
+                    console.log('关闭...');
+                    dialog.setMessage('马上就要关闭了');
+                    dialog.setTime(3, openNewDialog);
+                    return false;
+                });
+            }
+
+            function openNewDialog(){
+                this.remove();
+                iot.dialog({
+                    width: 200,
+                    height: '200px',
+                    title: '再来一个',
+                    message: '重新开启一个, 2秒后关闭',
+                    lock: false
+                }).setTime(2);
+            }
+
+            //自动关闭
+            var autoCloasDialog = iot.dialog({
+                id: 'AUTO-CLOSE',
+                title: '自动关闭',
+                message: '5秒后自动关闭',
+                lock: true,
+                time: 5
+            });
+
+            var index = 1;
+            var stin = setInterval(function(){
+
+                if(index === 6){
+                    clearInterval(stin);
+                    delete stin;
+                    autoCloasDialog.remove();
+                    return false;
+                }else if(index > 2){
+                    autoCloasDialog.isLock(false);
+                }
+                autoCloasDialog.setTitle(6 - (++index));
+
+            }, 1000);
+
+        };
+    </script>
+
+</body>
+</html>
