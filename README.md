@@ -50,7 +50,34 @@
 
 ```
 
-##options
+##options prop
+```javascript
+
+    dialog.width;
+    dialog.height;
+    dialog.title;
+    dialog.id;
+    dialog.ok；
+    dialog.cancel;
+    dialog.message;
+    dialog.lock;
+    dialog.time;
+
+```
+
+##options Mothed
+```javascript
+
+    dialog.isLock(true);
+    dialog.open(id, options);
+    dialog.close(id);
+    dialog.remove();
+    dialog.affirm(text, function)；
+    dialog.shut(text, function);
+    dialog.show();
+    dialog.hide();
+
+```
 
 #License
 ISC
