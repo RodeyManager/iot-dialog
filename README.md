@@ -36,16 +36,6 @@
     //设置自动关闭时间  秒为单位
     dialog.setTime(3);
 
-    //options
-    dialog.isLock(true);
-    dialog.open(id, options);
-    dialog.close(id);
-    dialog.remove();
-    dialog.affirm(text, function)；
-    dialog.shut(text, function);
-    dialog.show();
-    dialog.hide();
-
 ```
 
 ##options prop
