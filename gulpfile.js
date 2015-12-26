@@ -13,10 +13,13 @@ gulp.task('build.ts', function(){
 
     gulp.src('src/*.ts')
         .pipe(gulpTsc({
-            sourceMap: true,
+            sourceMap: false,
             outDir: 'dist',
             out: 'iot-dialog.js'
         }))
+        .pipe(gulp.dest('dist'))
+        .pipe(uglify())
+        .pipe(rename('iot-dialog.min.js'))
         .pipe(gulp.dest('dist'));
 
 });

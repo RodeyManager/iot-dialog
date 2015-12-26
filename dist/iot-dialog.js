@@ -96,6 +96,25 @@ var iot;
             }
         };
         /**
+         * 设置元素样式
+         * @param dom       元素
+         * @param style     样式[string | object] exp: 'text-align:left;' || { 'text-align': 'left' }
+         * @returns {iot.Dialog}
+         */
+        Dialog.prototype.setStyle = function (dom, style) {
+            if (!dom || dom === '')
+                return this;
+            if (typeof style === 'string') {
+                dom.style = style;
+            }
+            else if (typeof style === 'object') {
+                for (var k in style) {
+                    dom.style[this._switchStyle(k)] = style[k];
+                }
+            }
+            return this;
+        };
+        /**
          * 设置当前弹框标题
          * @param title
          */
@@ -106,6 +125,25 @@ var iot;
             return this;
         };
         /**
+         * 是否显示标题
+         * @param flag
+         * @returns {iot.Dialog}
+         */
+        Dialog.prototype.showTitle = function (flag) {
+            if (flag === void 0) { flag = true; }
+            var display = flag ? 'block' : 'none';
+            this._titleDom.style.display = display;
+            return this;
+        };
+        /**
+         * 设置标题样式
+         * @param style
+         * @returns {Dialog}
+         */
+        Dialog.prototype.setTitleStyle = function (style) {
+            return this.setStyle(this._titleDom, style);
+        };
+        /**
          * 设置当前弹框内容
          * @param message
          */
@@ -113,6 +151,24 @@ var iot;
             if (message && '' != message) {
                 this._contentDom.innerHTML = message;
             }
+            return this;
+        };
+        /**
+         * 设置内容区样式
+         * @param style
+         * @returns {iot.Dialog}
+         */
+        Dialog.prototype.setMessageStyle = function (style) {
+            return this.setStyle(this._contentDom, style);
+        };
+        /**
+         * 设置按钮样式
+         * @param style
+         * @returns {iot.Dialog}
+         */
+        Dialog.prototype.setButtonStyle = function (style) {
+            this.setStyle(this._okBtn, style);
+            this.setStyle(this._cancelBtn, style);
             return this;
         };
         /**
@@ -382,8 +438,17 @@ var iot;
         Dialog.prototype._hideElement = function (element) {
             element.style.display = 'none';
         };
+        Dialog.prototype._switchStyle = function (style) {
+            var regx = new RegExp('[\\s\\S]*?(-[\\w]?)[\\s\\S]*?', 'gi');
+            var ms = regx.exec(style);
+            var match = ms[1], rs;
+            regx.lastIndex = 0;
+            if (match) {
+                rs = match.replace(/-/gi, '').toUpperCase();
+            }
+            return style.replace(match, rs);
+        };
         return Dialog;
     })();
     iot.Dialog = Dialog;
 })(iot || (iot = {}));
-//# sourceMappingURL=iot-dialog.js.map

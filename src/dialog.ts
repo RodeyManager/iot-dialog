@@ -124,6 +124,25 @@ module iot{
         }
 
         /**
+         * 设置元素样式
+         * @param dom       元素
+         * @param style     样式[string | object] exp: 'text-align:left;' || { 'text-align': 'left' }
+         * @returns {iot.Dialog}
+         */
+        public setStyle(dom: any, style: any): Dialog{
+            if(!dom || dom === '') return this;
+            if(typeof style === 'string'){
+                dom.style = style;
+            }
+            else if(typeof style === 'object'){
+                for(var k in style){
+                    dom.style[this._switchStyle(k)] = style[k];
+                }
+            }
+            return this;
+        }
+
+        /**
          * 设置当前弹框标题
          * @param title
          */
@@ -135,6 +154,26 @@ module iot{
         }
 
         /**
+         * 是否显示标题
+         * @param flag
+         * @returns {iot.Dialog}
+         */
+        public showTitle(flag: boolean = true): Dialog{
+            var display: string = flag ? 'block' : 'none';
+            this._titleDom.style.display = display;
+            return this;
+        }
+
+        /**
+         * 设置标题样式
+         * @param style
+         * @returns {Dialog}
+         */
+        public setTitleStyle(style: any): Dialog{
+            return this.setStyle(this._titleDom, style);
+        }
+
+        /**
          * 设置当前弹框内容
          * @param message
          */
@@ -142,6 +181,26 @@ module iot{
             if(message && '' != message){
                 this._contentDom.innerHTML = message;
             }
+            return this;
+        }
+
+        /**
+         * 设置内容区样式
+         * @param style
+         * @returns {iot.Dialog}
+         */
+        public setMessageStyle(style: any): Dialog{
+            return this.setStyle(this._contentDom, style);
+        }
+
+        /**
+         * 设置按钮样式
+         * @param style
+         * @returns {iot.Dialog}
+         */
+        public setButtonStyle(style: any): Dialog{
+            this.setStyle(this._okBtn, style);
+            this.setStyle(this._cancelBtn, style);
             return this;
         }
 
@@ -436,6 +495,17 @@ module iot{
          */
         private _hideElement(element: HTMLElement): void{
             element.style.display = 'none';
+        }
+
+        private _switchStyle(style: string): string{
+            var regx = new RegExp('[\\s\\S]*?(-[\\w]?)[\\s\\S]*?', 'gi');
+            var ms = regx.exec(style);
+            var match = ms[1], rs;
+            regx.lastIndex = 0;
+            if(match){
+                rs = match.replace(/-/gi, '').toUpperCase();
+            }
+            return style.replace(match, rs);
         }
 
 
